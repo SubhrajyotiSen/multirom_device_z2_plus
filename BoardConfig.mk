@@ -65,7 +65,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
@@ -83,3 +83,26 @@ TW_INCLUDE_NTFS_3G := true
 TW_NO_USB_STORAGE := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_THEME := portrait_hdpi
+
+
+# MR config. MultiROM also uses parts of TWRP config
+TARGET_RECOVERY_IS_MULTIROM := true
+MR_ALLOW_NKK71_NOKEXEC_WORKAROUND := true
+MR_DPI := hdpi
+MR_DPI_FONT := 216
+MR_USE_MROM_FSTAB := true
+MR_FSTAB := $(PLATFORM_PATH)/multirom/mrom.fstab
+MR_PIXEL_FORMAT := "RGBA_8888"
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := $(PLATFORM_PATH)/multirom/mr_init_devices.c
+MR_KEXEC_MEM_MIN := 0x00200000
+MR_DEVICE_HOOKS := $(PLATFORM_PATH)/multirom/mr_hooks.c
+MR_DEVICE_HOOKS_VER := 4
+MR_DEVICE_VARIANTS := Z2_Plus
+
+DEVICE_RESOLUTION := 1080x1920
+MR_DEV_BLOCK_BOOTDEVICE := true
+
+#Force populating /dev/block/platform/msm_sdcc.1/by-name
+#from the emmc, needed by devices like the HTC One M7
+MR_POPULATE_BY_NAME_PATH := "/dev/block/platform/msm_sdcc.1/by-name"
