@@ -23,6 +23,11 @@
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
 
+# Inherit from oppo-common
+#-include device/oppo/common/BoardConfigCommon.mk
+
+TARGET_OTA_ASSERT_DEVICE := z2,Z2,z2plus,z2_plus
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -42,7 +47,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=16M@0-0xffffffff
+BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=16M@0-0xffffffff androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
@@ -94,16 +99,16 @@ MR_CONTINUOUS_FB_UPDATE := true
 MR_DPI := xhdpi
 MR_DPI_FONT := 340
 MR_USE_MROM_FSTAB := true
-MR_FSTAB := $(PLATFORM_PATH)/multirom/mrom.fstab
+MR_FSTAB := device/zuk/z2_plus/multirom/mrom.fstab
 MR_INPUT_TYPE := type_b
-MR_INIT_DEVICES := $(PLATFORM_PATH)/multirom/mr_init_devices.c
+MR_INIT_DEVICES := device/zuk/z2_plus/multirom/mr_init_devices.c
 MR_KEXEC_MEM_MIN := 0xac000000
 MR_KEXEC_DTB := true
-MR_DEVICE_HOOKS := $(PLATFORM_PATH)/multirom/mr_hooks.c
+MR_DEVICE_HOOKS := device/zuk/z2_plus/multirom/mr_hooks.c
 MR_DEVICE_HOOKS_VER := 4
-MR_DEVICE_VARIANTS := Z2_Plus z2_plus
+MR_DEVICE_VARIANTS := z2_plus Z2_Plus Z2131 z2131 Z2 z2 Z2Plus z2plus
 MR_USE_QCOM_OVERLAY := true
-MR_QCOM_OVERLAY_HEADER := $(PLATFORM_PATH)/multirom/mr_qcom_overlay.h
+MR_QCOM_OVERLAY_HEADER := device/zuk/z2_plus/multirom/mr_qcom_overlay.h
 MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_RGBX_8888
 # bootmenu
 DEVICE_RESOLUTION := 1080x1920
@@ -111,7 +116,7 @@ MR_PIXEL_FORMAT := "RGBA_8888"
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 MR_DEV_BLOCK_BOOTDEVICE := true
 # Versioning
-include $(PLATFORM_PATH)/multirom/MR_REC_VERSION.mk
+include device/zuk/z2_plus/multirom/MR_REC_VERSION.mk
 BOARD_MKBOOTIMG_ARGS += --board mrom$(MR_REC_VERSION)
 MR_REC_VERSION := $(shell date -u +%Y%m%d)-01
 MR_DEVICE_SPECIFIC_VERSION := e
@@ -119,4 +124,4 @@ MR_ENCRYPTION := true
 
 #Force populating /dev/block/platform/msm_sdcc.1/by-name
 #from the emmc
-MR_POPULATE_BY_NAME_PATH := "/dev/block/platform/msm_sdcc.1/by-name"
+MR_POPULATE_BY_NAME_PATH := "/dev/block/bootdevice/by-name/"

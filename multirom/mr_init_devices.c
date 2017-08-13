@@ -13,42 +13,49 @@ const char *mr_init_devices[] =
     "/sys/devices/virtual/graphics/fb0",
     "/sys/devices/virtual/graphics/fb1",
 
-    "/sys/block/sda/*",
-    "/sys/block/sde/*",
+    "/sys/block/mmcblk0*",
 
-    // boot and data
-    "/sys/block/sde/sde18", //boot
-    "/sys/block/sda/sda15", //data
 
-    // system and cache
-    "/sys/block/sde/sde20", //system
-    "/sys/block/sda/sda3", //cache
+    "/sys/block/mmcblk0/mmcblk0p14", //boot
+    "/sys/block/mmcblk0/mmcblk0p48", //data
 
-    // Mount persist and firmware
-    "/sys/block/sda/sda2", // persist
-    "/sys/block/sde/sde11", // firmware
+     "/sys/block/mmcblk0/mmcblk0p16", //system
+    "/sys/block/mmcblk0/mmcblk0p39", //cache
 
+    "/sys/block/mmcblk0/mmcblk0p40", // persist
+    "/sys/block/mmcblk0/mmcblk0p23", // modem
+
+    "/sys/bus*",
+    "/sys/devices*",
     "/sys/bus/mmc*",
     "/sys/bus/mmc/drivers/mmcblk",
-    "/sys/bus/sdio/drivers",
+    "/sys/bus/mmc/drivers/mmcblk*",
     "/sys/module/sdhci",
     "/sys/module/sdhci*",
     "/sys/module/sdhci_msm",
     "/sys/module/sdhci_msm*",
+    "/sys/module/mmc_core",
+    "/sys/module/mmcblk",
+
+    // looks like storage to me
+    "/sys/devices/soc/7464900.sdhci/mmc_host*",
+    "/sys/devices/soc/74a4900.sdhci/mmc_host*",
 
     // for input
     "/sys/devices/virtual/input*",
     "/sys/devices/virtual/input/input0",
     "/sys/devices/virtual/misc/uinput",
-    "/sys/devices/soc/soc:gpio_keys/input4*",
-    "/sys/devices/soc/soc:gpio_keys/input0*",
-    "/sys/bus/platform/devices/gpio_keys/input*"
+    "/sys/devices/soc/soc:gpio_keys/input/input5*",
+    "/sys/bus/platform/devices/soc:gpio_keys*"
     "/sys/devices/virtual/misc/uinput",
     "/sys/devices/virtual/misc/uinput/*",
-    "/sys/devices/soc/75b6000.i2c/i2c-8/8-0020/input*",
-    "/sys/devices/soc/75b6000.i2c/i2c-8/8-0020/input/input6*",
-    "/sys/devices/soc/7577000.i2c/i2c-3/3-0036/*",
-    "/sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input4*",
+    "/sys/devices/soc/soc:gpio_keys*",
+    // soft i2c
+    "/sys/devices/virtual/input*",
+    "/sys/devices/virtual/input/input1",
+    "/sys/devices/virtual/input/input2",
+    "/sys/devices/virtual/input/input3",
+    "/sys/devices/virtual/input/input4",
 
     // for adb
     "/sys/class/tty/ptmx",
@@ -59,8 +66,9 @@ const char *mr_init_devices[] =
     "/sys/bus/usb",
 
     // USB Drive
+    "/sys/devices/soc/6a00000.ssusb/6a00000.dwc3/xhci-hcd*",
     "/sys/bus/platform/drivers/xhci-hcd*",
-    "/sys/block/sda/sda1",
+	"/sys/block/sda/sda1",
 
 
     // for qualcomm overlay - /dev/ion
